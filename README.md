@@ -25,7 +25,7 @@
 - The Invention of Multiprocessors to solve the Power Wall problem
 
 ## Category
-- Problem Solving Stories
+- Problem Solving Stories (S03)
 
 ## Tech Stack Plan
 ### Problem Solving Story

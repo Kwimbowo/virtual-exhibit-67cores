@@ -6,6 +6,6 @@ import icon from 'astro-icon';
 export default defineConfig({
   integrations: [mdx(), react(), icon()],
   site: 'https://kwimbowo.github.io',
-  base: '/67cores',
+  base: 'virtual-exhibit-template',
 });
 

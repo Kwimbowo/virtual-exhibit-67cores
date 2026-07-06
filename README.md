@@ -57,7 +57,7 @@ After using this tool/service, the authors reviewed and edited the content as ne
     - **Active Cores** - Users are free to adjust the number of cores being utilized by the processor. While more cores give increased efficiency, they also increase power consumption and heat output.
     - **Cooling** - Users will be limited by the amount of “cooling” they choose (65 watts, 100 watts, etc.). Once the cooling chosen gets overwhelmed by the user’s chosen input config, the CPU may perform thermal throttling, slowing down its own computational speed.
     - **Clock Speed (GHz)** - Users may adjust the number of cycles the processor can execute per second. Like the aforementioned active cores, increasing the clock speed improves efficiency at the cost of heat and power.
-    - **Cooling Solution (TDP) **- Users may select the maximum amount of heat the cooling system must generate from 65W, 100W, or 150W. If the selected cooling system is less than the heat generated, the CPU's performance will be impacted.
+    - **Cooling Solution (TDP)** - Users may select the maximum amount of heat the cooling system must generate from 65W, 100W, or 150W. If the selected cooling system is less than the heat generated, the CPU's performance will be impacted.
 
 - b. Users are also able to view the estimated Actual Power, Execution Time, Status, Effective Clock, and Total Energy Score of the CPU.
     - **Actual Power** - The calculated actual power consumed by the processor.

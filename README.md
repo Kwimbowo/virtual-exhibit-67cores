@@ -1,20 +1,20 @@
-# CSARCH2 Case Study: Virtual Exhibit Topic Proposal
+# CSARCH2 Case Study: "Multicore Processors: Keeping It Cool"
 
 ## Table of Contents
 - [Group's Title](#groups-title)
 - [Group Roster](#group-roster)
 - [Group's Topic Theme](#groups-topic-theme)
 - [Category](#category)
-- [Development Documentation (INCREMENTAL README SECTION)](#development-documentation)
+- [Development Documentation](#development-documentation)
     - [Conceptualization](#conceptualization)
     - [Implementation](#implementation)
     - [What We Learned](#what-we-learned)
     - [What's Next](#whats-next-for-final-submission)
-- [Generative AI Use Disclosute](#generative-ai-use-disclosure)
+- [Generative AI Use Disclosure](#generative-ai-use-disclosure)
 - [Tech Stack Plan](#tech-stack-plan)
     - [Problem Solving Story](#problem-solving-story)
     - [Interactive Element](#interactive-element)
-- [Tenetative Style Guide Plan](#tentative-style-guide-plan)
+- [Tentative Style Guide Plan](#tentative-style-guide-plan)
 - [References](#references)
 
 ## Group's Title
@@ -41,21 +41,21 @@ There are many problem-solving stories to choose from in the entire history of c
 Given the exhibit template, the actual implementation of the exhibit webpage was fairly straightforward. For the mid-milestone, we have managed to finish implementing the interactive component and most, if not all of the contents of the exhibit; the webpage is more or less ready for deployment.
 
 ### What we learned
-From the problem-solving story our group chose, we learned about how computers mostly only had single-core CPUs back then and how slow they were at multitasking relative to their performance in individual applications compared to the computers we have today, and from this we gained appreciation for the multicore technology that is in all the devices we use today but taken for granted, as well as for the people who pioneered this technology. We also learned from the story about the power wall problem that limited the max single-core frequency of CPUs, for which multicore technology was a workaround to keep increasing CPU performance wihout having to focus on single-core frequency.
+From the problem-solving story our group chose, we learned about how computers mostly only had single-core CPUs back then and how slow they were at multitasking relative to their performance in individual applications compared to the computers we have today, and from this we gained appreciation for the multicore technology that is in all the devices we use today but taken for granted, as well as for the people who pioneered this technology. We also learned from the story about the power wall problem that limited the max single-core frequency of CPUs, for which multicore technology was a workaround to keep increasing CPU performance without having to focus on single-core frequency.
 
 ### What's next (for final submission)
 With the current state of the exhibit webpage already being ready for deployment, the group plans to further improve the design and UI of the interactive component, add more text content and information further expounding on multicore processors, and implement revisions as needed by the course instructor.
 
 ## Generative AI Use Disclosure
 During the preparation of this exhibit webpage, the group used the following generative AI tools and/or services:
-- [**Gemini**](https://gemini.google.com/) was used to streamline learning programming in React for the interactive component in this project, as well as for recommendations in making the code written by the authors more clean, readable, and efficient.
+- [**Gemini**](https://gemini.google.com/) was used to streamline learning programming in React for the interactive component in this project, as well as for recommendations on making the code written by the authors cleaner, more readable, and more efficient.
 
 After using this tool/service, the authors reviewed and edited the content as needed and take full responsibility for the content of the publication.
 
 ## Tech Stack Plan
 ### Problem Solving Story
 - Users will be greeted with a brief introduction to the invention of Multicore Processors.
-    - In the past, computer processors were mainly single core. This meant computer programs ran linearly, and never spontaneously. However, sometime in 2005, CPU chip companies started experimenting with multicore CPUs, increasing chip productivity exponentially. This led to the release of the dual-core processor, a rather obsolete architecture compared to the quad or octa-core processors we commonly use today.
+    - In the past, computer processors were mainly single-core. This meant computer programs ran linearly and never spontaneously. However, sometime in 2005, CPU chip companies started experimenting with multicore CPUs, increasing chip productivity exponentially. This led to the release of the dual-core processor, a rather obsolete architecture compared to the quad- or octa-core processors we commonly use today.
 
 ### Interactive Element
 - a. Users are given a set of computational tasks and must process them by adjusting CPU parameters, i.e., currently active cores, clock speed, voltage, and cooling.
@@ -73,7 +73,7 @@ After using this tool/service, the authors reviewed and edited the content as ne
     - **Total Energy Score** - Computed total energy score in J
 
 - c. The goal is to finish the tasks using the least amount of resources, meaning the most efficient in time and power used. Ideally, the user learns:
-    - Excessively increasing the power consumption and clock speeds of a CPU risks producing too much heat and getting thermal throttled.
+    - Excessively increasing the power consumption and clock speeds of a CPU risks producing too much heat and getting thermal-throttled.
     - To achieve a high score, they must learn to choose the multicore architecture to distribute the tasks among the different cores, then choose the most efficient input combination to finish the task.
 
 - d. The following are the formulas to be used in computation (using programming syntax):

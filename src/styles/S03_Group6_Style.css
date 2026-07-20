@@ -296,7 +296,7 @@ html:has(.multicore-exhibit) footer {
     font-family: monospace !important;
 }
 html:has(.multicore-exhibit) .toc{
-    background: rgba(34, 37, 48, 1) !important;
+    background: rgba(34, 37, 48) !important;
     backdrop-filter: blur(8px) !important;
     -webkit-backdrop-filter: blur(8px) !important;
     border: 1px solid var(--borderS) !important;

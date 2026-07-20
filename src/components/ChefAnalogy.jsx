@@ -2,20 +2,25 @@
 import { useState, useEffect } from "react";
 
 export default function ChefAnalogy() {
-    const [orders, setOrders] = useState(0);
+    const [tick, setTick] = useState(0);
 
     // Auto-increment orders for animation
     useEffect(() => {
-        const interval = setInterval(() => setOrders((prev) => (prev + 1) % 10), 1000);
+        const interval = setInterval(() => {
+            setTick((prev) => (prev + 1) % 17); 
+        }, 220);
         return () => clearInterval(interval);
     }, []);
+
+    const singleCoreOrders = tick;
+    const multiCoreOrders = Math.min(tick, 4);
 
     return (
         <div style={styles.container}>
             {/* Single Core / Single Chef */}
             <div style={styles.kitchen}>
                 <div style={styles.header}>
-                    <h4 style={{color: "#ff4d4d"}}>Single-Core (1 Fast Chef)</h4>
+                    <h4 style={{color: "#ff4d4d", fontFamily: "monospace", fontSize: "1.3rem", paddingBottom: "1rem"}}>Single-Core (1 Fast Chef)</h4>
                     <p style={styles.desc}>High Speed, Overheating, Bottlenecked</p>
                 </div>
                 <div style={styles.chefContainer}>
@@ -25,8 +30,8 @@ export default function ChefAnalogy() {
                     </div>
                 </div>
                 <div style={styles.orderQueue}>
-                    {Array(8).fill('🍔').map((burger, i) => (
-                        <span key={i} style={{ opacity: i < orders ? 1 : 0.2, transition: "0.2s" }}>{burger}</span>
+                    {Array(16).fill('🥪').map((burger, i) => (
+                        <span key={i} style={{ opacity: i < singleCoreOrders ? 1 : 0.2, transition: "0.2s" }}>{burger}</span>
                     ))}
                 </div>
             </div>
@@ -36,18 +41,35 @@ export default function ChefAnalogy() {
             {/* Multi Core / Multiple Chefs */}
             <div style={styles.kitchen}>
                 <div style={styles.header}>
-                    <h4 style={{color: "#3cd66a"}}>Multi-Core (4 Efficient Chefs)</h4>
+                    <h4 style={{color: "#3cd66a", fontFamily: "monospace", fontSize: "1.1rem", paddingBottom: "1.6rem"}}>Multi-Core (4 Efficient Chefs)</h4>
                     <p style={styles.desc}>Moderate Speed, Cool, Parallel Execution</p>
                 </div>
                 <div style={styles.multiChefContainer}>
-                    {[1, 2, 3, 4].map((i) => (
+                    {[1, 2, 3, 4,].map((i) => (
                         <div key={i} style={styles.chef}>👨‍🍳</div>
                     ))}
                 </div>
-                <div style={styles.multiOrderQueue}>
-                    {Array(8).fill('🍔').map((burger, i) => (
-                        <span key={i} style={{ opacity: i < orders * 2 ? 1 : 0.2, transition: "0.2s" }}>{burger}</span>
-                    ))}
+                <div style={styles.queuesWrapper}>
+                    <div style={styles.multiOrderQueue}>
+                        {Array(4).fill('🥪').map((burger, i) => (
+                            <span key={i} style={{ opacity: i < multiCoreOrders * 1 ? 1 : 0.2, transition: "0.2s" }}>{burger}</span>
+                        ))}
+                    </div>
+                    <div style={styles.multiOrderQueue}>
+                        {Array(4).fill('🥪').map((burger, i) => (
+                            <span key={i} style={{ opacity: i < multiCoreOrders * 1 ? 1 : 0.2, transition: "0.2s" }}>{burger}</span>
+                        ))}
+                    </div>
+                    <div style={styles.multiOrderQueue}>
+                        {Array(4).fill('🥪').map((burger, i) => (
+                            <span key={i} style={{ opacity: i < multiCoreOrders * 1 ? 1 : 0.2, transition: "0.2s" }}>{burger}</span>
+                        ))}
+                    </div>
+                    <div style={styles.multiOrderQueue}>
+                        {Array(4).fill('🥪').map((burger, i) => (
+                            <span key={i} style={{ opacity: i < multiCoreOrders * 1 ? 1 : 0.2, transition: "0.2s" }}>{burger}</span>
+                        ))}
+                    </div>
                 </div>
             </div>
         </div>
@@ -59,7 +81,7 @@ const styles = {
         display: "flex",
         gap: "2rem",
         background: "#16191b",
-        padding: "2rem",
+        padding: "1rem 2rem",
         borderRadius: "16px",
         border: "1px solid var(--borderS)",
         margin: "2rem 0",
@@ -74,6 +96,7 @@ const styles = {
     },
     header: {
         textAlign: "center",
+        fontFamily: "monospace"
     },
     desc: {
         fontSize: "0.85rem",
@@ -96,7 +119,7 @@ const styles = {
         position: "relative",
         background: "rgba(255,255,255,0.05)",
         padding: "10px",
-        borderRadius: "50%",
+        borderRadius: "10%",
         border: "1px solid rgba(255,255,255,0.1)",
     },
     sweatingChef: {
@@ -113,16 +136,23 @@ const styles = {
         fontSize: "1rem",
     },
     orderQueue: {
-        display: "flex",
+        display: "grid",
+        gridTemplateColumns: "repeat(8, 1fr)",
         gap: "5px",
         fontSize: "1.5rem",
         background: "#0a0a0a",
         padding: "10px",
         borderRadius: "8px",
     },
+    queuesWrapper: {
+        display: "flex",
+        gap: "1rem",
+        width: "100%",
+        justifyContent: "center",
+    },
     multiOrderQueue: {
         display: "grid",
-        gridTemplateColumns: "repeat(4, 1fr)",
+        gridTemplateColumns: "repeat(2, 2fr)",
         gap: "5px",
         fontSize: "1.5rem",
         background: "#0a0a0a",

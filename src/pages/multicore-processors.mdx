@@ -8,6 +8,10 @@ readingTime: "6-7 minutes"
 
 {/* component imports */}
 import InteractiveCpu from '../components/InteractiveCpu.jsx';
+import Background from '../components/Background.astro';
+import '../styles/style.css';
+
+<Background />
 
 {/* main article */}
 ## Problem Solving Story
@@ -21,7 +25,7 @@ The result was a massive increase in computing power. The first dual-core proces
 
 But how did it work? Multicore processors bypassed the Power Wall by exploiting the physics of dynamic power consumption in CMOS circuits. The relationship between a chip's power and its operational variables is expressed by the formula:
 
-** P = C * V^2 * f**
+**P = C * V^2 * f**
 
 Where $P$ represents power, $C$ represents capacitance, $V$ represents voltage, and $f$ represents frequency. Because power consumption scales quadratically with voltage ($V^2$), running a single core at extreme frequencies requires a high operating voltage that causes power and heat to spike exponentially.By splitting a workload across multiple cores, each individual core can run at a significantly lower frequency ($f$) and a reduced operating voltage ($V$). Because of the quadratic relationship, a slight reduction in voltage yields a massive drop in heat and power usage. This allowed computing throughput to increase through parallel execution without exceeding the thermal and power limits of the chip. The architecture fixed the sequential bottleneck by allowing the operating system to execute entirely separate computing tasks, or distinct threads of the same task, at the exact same time.
 

@@ -64,7 +64,19 @@ html:has(.multicore-exhibit) .article h3 {
     padding-bottom: 0.5rem;
 }
 
+html:has(.multicore-exhibit) .article h4 {
+	margin-top: 0;
+	padding-top: 0;
+    color: #ffffff;
+    font-family: monospace, sans-serif !important;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    border-bottom: 1px dashed var(--accent) !important;
+    padding-bottom: 0.5rem;
+}
+
 html:has(.multicore-exhibit) .exhibitlink:hover{
+	margin: 0;
     border-color: var(--accent) !important;
     transform: none !important;
     background-color: rgba(34, 37, 48, 0.274) !important;

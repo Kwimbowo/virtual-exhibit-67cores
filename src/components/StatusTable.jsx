@@ -27,8 +27,8 @@ export default function StatusTable({throttle=false, effectiveClock=0, energySco
 
 const styles = {
     container: {
-        borderTop: "2px solid black",
-        borderBottom: "2px solid black",
+		borderTop: "1px dashed #5076a7",
+		borderBottom: "1px dashed #5076a7",
         padding: "16px 0",
         width: "100%",
         boxSizing: "border-box", 

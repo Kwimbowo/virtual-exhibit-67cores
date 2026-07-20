@@ -7,12 +7,12 @@ readingTime: "6-7 minutes"
 ---
 
 {/* component imports */}
-import InteractiveCpu from '../components/InteractiveCpu.jsx';
-import Background from '../components/S03_Group6_Background.astro';
-import ComparisonTable from '../components/ComparisonTable.jsx';
-import TrendGraph from '../components/TrendGraph.jsx';
-import ChefAnalogy from '../components/ChefAnalogy.jsx';
-import PowerFormula from '../components/PowerFormula.jsx';
+import InteractiveCpu from '../components/S03_Group6/InteractiveCpu.jsx';
+import Background from '../components/S03_Group6/Background.astro';
+import ComparisonTable from '../components/S03_Group6/ComparisonTable.jsx';
+import TrendGraph from '../components/S03_Group6/TrendGraph.jsx';
+import ChefAnalogy from '../components/S03_Group6/ChefAnalogy.jsx';
+import PowerFormula from '../components/S03_Group6/PowerFormula.jsx';
 
 <div class="multicore-exhibit">
 <Background />
@@ -35,13 +35,9 @@ A multicore processor changes the layout. Instead of forcing one chef to work at
 
 But how did this solve the Power Wall mathematically? It comes down to the physics of dynamic power consumption in CMOS circuits, expressed by the following formula:
 
-$$ P = C \cdot V^2 \cdot f $$
-
-Where **P** represents power, **C** represents capacitance (a constant based on the chip's physical design), **V** represents voltage, and **f** represents frequency.
-
 <PowerFormula client:load />
 
-Because power consumption scales quadratically with voltage ($V^2$), running a single core at extreme frequencies requires a high operating voltage that causes power and heat to spike exponentially. By splitting a workload across multiple cores, each individual core can run at a significantly lower frequency ($f$) and a reduced operating voltage ($V$). Because of the quadratic relationship, a slight reduction in voltage yields a massive drop in heat and power usage. This allowed computing throughput to increase through parallel execution without exceeding the thermal limits of the silicon.
+Because power consumption scales quadratically with voltage, running a single core at extreme frequencies requires a high operating voltage that causes power and heat to spike exponentially. By splitting a workload across multiple cores, each individual core can run at a significantly lower frequency and a reduced operating voltage. Because of the quadratic relationship, a slight reduction in voltage yields a massive drop in heat and power usage. This allowed computing throughput to increase through parallel execution without exceeding the thermal limits of the silicon.
 
 ## The Multicore CPU
 The transition to multicore architecture originally took root in heavy-duty enterprise and server spaces, with IBM introducing the first commercial non-embedded dual-core processor, the POWER4, in 2001. However, the architecture truly went mainstream in 2005 when Intel released the Pentium D and AMD launched the Athlon 64 X2. This marked a monumental paradigm shift in software development; programmers could no longer rely on hardware engineers to automatically speed up their applications and instead had to learn how to write multi-threaded code to take advantage of parallel computing. Over the past two decades, this has evolved from simple dual-core setups to complex hybrid architectures (like ARM's big.LITTLE or Intel's Performance/Efficient core splits) found in modern smartphones, laptops, and desktop computers.
@@ -60,7 +56,7 @@ The display provides real-time feedback to help you evaluate your choices. You c
 
 To succeed, start with moderate settings like four cores at 2.5 GHz with 100W cooling. Adjust one parameter at a time and watch how the feedback changes. If you see red cores, reduce your clock speed or number of active cores to stay within cooling limits. The key lesson is that pushing settings too high leads to thermal throttling, which actually makes the task take longer. By balancing speed with efficiency, you can complete the **5000 unit workload** using the least amount of energy possible.
 
-## References:
+## References
 - https://en.wikipedia.org/wiki/Multi-core_processor
 - https://www.cs.utexas.edu/~lin/cs380p/Free_Lunch.pdf
 - https://www.edn.com/future-of-computers-part-2-the-power-wall/ 
@@ -71,4 +67,5 @@ To succeed, start with moderate settings like four cores at 2.5 GHz with 100W co
 - https://www.sciencedirect.com/topics/computer-science/dynamic-voltage-and-frequency-scaling
 - https://www.microchipusa.com/electrical-components/cpu-power-dissipation
 - https://www.revisiondojo.com/blog/single-core-vs-multi-core-processors-explained
+- https://www.karlrupp.net/2018/02/42-years-of-microprocessor-trend-data/
 </div>

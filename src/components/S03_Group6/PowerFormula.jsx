@@ -1,25 +1,32 @@
-// src/components/PowerFormula.jsx
 import { useState } from "react";
 
 export default function PowerFormula() {
   const [voltage, setVoltage] = useState(1.2);
   const [frequency, setFrequency] = useState(3.0);
+  const [capacitance, setCapacitance] = useState(40);
 
-  const power = (voltage ** 2 * frequency).toFixed(2);
-  const maxPower = 1.5 ** 2 * 5.0;
+  const power = (capacitance * voltage ** 2 * frequency).toFixed(2);
+  const maxPower = 100*1.5 ** 2 * 5.0;
   const powerPercent = (Number(power) / maxPower) * 100;
 
   return (
     <div style={styles.container}>
       <div style={styles.formulaBox}>
         <span style={{ color:"#a0a5aa"}}>Total Power = </span>
-        <span style={{ color:"white"}}>C × </span>
-        <span style={{color:"#ff4d4d",fontWeight:"bold",textShadow:"0 0 8px rgba(255,77,77,.6)"}}>V²</span>
+        <span style={{ color:"white"}}>Capacitance × </span>
+        <span style={{color:"#ff4d4d",fontWeight:"bold",textShadow:"0 0 8px rgba(255,77,77,.6)"}}>Voltage²</span>
         <span style={{color:"white"}}> × </span>
-        <span style={{color:"#3cd66a",textShadow:"0 0 6px rgba(60,214,106,.4)"}}>f</span>
+        <span style={{color:"#3cd66a",textShadow:"0 0 6px rgba(60,214,106,.4)"}}>Frequency</span>
       </div>
 
       <div style={styles.controls}>
+        <div style={styles.controlGroup}>
+          <label style={styles.label}>Capacitance: <span style={{color:"#ffffff"}}>{capacitance.toFixed(2)}F</span></label>
+          <Slider min={5} max={100} step={0.01} value={capacitance}
+            onChange={e=>setCapacitance(Number(e.target.value))}
+            display={`${capacitance.toFixed(2)}F`} accentColor="#ffffff"/>
+        </div>
+
         <div style={styles.controlGroup}>
           <label style={styles.label}>Voltage: <span style={{color:"#ff4d4d"}}>{voltage.toFixed(2)}V</span></label>
           <Slider min={0.8} max={1.5} step={0.01} value={voltage}
@@ -41,6 +48,7 @@ export default function PowerFormula() {
 			<div style={styles.barBackground}>
 			<div style={{
 				...styles.barFill,
+				textAlign:"center",
 				width: `${powerPercent}%`,
 				background: powerPercent > 75 ? "#ff4d4d" : powerPercent > 40 ? "#eab308" : "#3cd66a",
 				boxShadow: powerPercent > 75 ? "0 0 20px rgba(255,77,77,.6)" : "none",
@@ -151,7 +159,6 @@ barFill: {
   transition: "all .3s cubic-bezier(.4,0,.2,1)",
   textShadow: "0 1px 4px rgba(0,0,0,0.6)",
   whiteSpace: "nowrap",
-  padding: "0 8px",
   boxSizing: "border-box",
 },
 barRow: {
@@ -160,7 +167,7 @@ barRow: {
   gap: 12,
 },
 barValue: {
-  minWidth: 60,
+  minWidth: 80,
   textAlign: "center",
   background: "linear-gradient(180deg, #4a5056, #2d3238)",
   border: "1px solid rgba(0, 0, 0, .4)",

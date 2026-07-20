@@ -1,4 +1,4 @@
-import "../styles/S03_Group6_ComparisonTable.css";
+import "../../styles/S03_Group6_ComparisonTable.css";
 
 export default function ComparisonTable() {
   return (

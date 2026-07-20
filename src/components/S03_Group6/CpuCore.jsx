@@ -1,4 +1,3 @@
-// src/components/CpuCore.jsx
 export default function CpuCore({ id = "#", active, throttle, ...rest }) {
     const statusStyle = !active ? styles.inactive : (throttle ? styles.throttle : styles.active);
     const coreStyle = { ...styles.border, ...statusStyle };
@@ -33,7 +32,7 @@ const styles = {
         textShadow: "0px -1px 1px rgba(0, 0, 0, 0.7), 0px 1px 1px rgba(120, 120, 120, 0.4)",
     },
     'inactive': {
-        background: "linear-gradient(180deg, #ffffff 0%, #e0e0e0 50%, #b8b8b8 100%)",
+        background: "linear-gradient(180deg, #393939 0%, #565656 50%, #393939 100%)",
         color: "#8c8c8c",
         textShadow: "0 1px 0 rgba(255, 255, 255, 0.8)",
         boxShadow: `

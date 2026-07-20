@@ -1,4 +1,4 @@
-import CpuCore from '../components/CpuCore.jsx';
+import CpuCore from './CpuCore.jsx';
 
 export default function CpuContainer({power=0, efficiency=0, throttle=false, 
     activeCount=0, executionTime=0, ...rest}) {
@@ -10,7 +10,7 @@ export default function CpuContainer({power=0, efficiency=0, throttle=false,
     }
 
     const warningMsg = !throttle ? <></> : <div style={styles.throttle}>
-                THERMAL THROTTLING DETECTED!
+                {/*WARNING MESSAGE HERE*/}
             </div>
 
     return <>

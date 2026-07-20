@@ -1,5 +1,3 @@
-// src/components/TrendGraph.jsx
-
 export default function TrendGraph() {
     // Sampling representative real data points from your provided .dat files
     const data = {

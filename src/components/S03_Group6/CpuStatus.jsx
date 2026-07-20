@@ -1,4 +1,3 @@
-
 export default function CpuStatus({throttle=false, executionTime=0, ...rest}) {
     const safeMsg = <>Running efficiently within thermal limits.<br />⁠</>;
     const badMsg = <>CPU is overheating! Clock speeds reduced to stay within thermal limits. <br />

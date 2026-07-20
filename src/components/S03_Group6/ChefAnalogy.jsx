@@ -1,32 +1,69 @@
-// src/components/ChefAnalogy.jsx
 import { useState, useEffect } from "react";
 
 export default function ChefAnalogy() {
     const [tick, setTick] = useState(0);
+    const [tickMultiple, setTickMultiple] = useState(0);
 
-    // Auto-increment orders for animation
     useEffect(() => {
-        const interval = setInterval(() => {
-            setTick((prev) => (prev + 1) % 17); 
-        }, 220);
-        return () => clearInterval(interval);
-    }, []);
+
+		const interval = setInterval(() => {
+
+			setTick((prev) => {
+
+				const next = (prev + 1) % 17;
+
+
+
+				if (next === 0) {
+
+					setTickMultiple(0);
+
+				}
+
+
+
+				return next;
+
+			});
+
+		}, 160);
+
+
+
+		return () => clearInterval(interval);
+
+	}, []);
+
+
+
+	useEffect(() => {
+
+		const interval = setInterval(() => {
+
+			setTickMultiple((prev) => (prev + 1) % 17);
+
+		}, 300);
+
+
+
+		return () => clearInterval(interval);
+
+	}, []);
 
     const singleCoreOrders = tick;
-    const multiCoreOrders = Math.min(tick, 4);
+    const multiCoreOrders = Math.min(tickMultiple, 4);
 
     return (
         <div style={styles.container}>
             {/* Single Core / Single Chef */}
             <div style={styles.kitchen}>
                 <div style={styles.header}>
-                    <h4 style={{color: "#ff4d4d", fontFamily: "monospace", fontSize: "1.3rem", paddingBottom: "1rem"}}>Single-Core (1 Fast Chef)</h4>
-                    <p style={styles.desc}>High Speed, Overheating, Bottlenecked</p>
+                    <h4 style={{color: "#ff4d4d", fontFamily: "monospace", fontSize: "1.3rem"}}>Single-Core</h4>
                 </div>
                 <div style={styles.chefContainer}>
                     <div style={{...styles.chef, ...styles.sweatingChef}}>
-                        👨‍🍳
-                        <div style={styles.speedLine}>⚡⚡⚡</div>
+                        <img src='/src/assets/S03_Group6_Ramsay.png' style={{
+		height: "70px"}}/>
                     </div>
                 </div>
                 <div style={styles.orderQueue}>
@@ -36,40 +73,26 @@ export default function ChefAnalogy() {
                 </div>
             </div>
 
-            <div style={styles.divider} />
-
             {/* Multi Core / Multiple Chefs */}
             <div style={styles.kitchen}>
                 <div style={styles.header}>
-                    <h4 style={{color: "#3cd66a", fontFamily: "monospace", fontSize: "1.1rem", paddingBottom: "1.6rem"}}>Multi-Core (4 Efficient Chefs)</h4>
-                    <p style={styles.desc}>Moderate Speed, Cool, Parallel Execution</p>
+                    <h4 style={{color: "#3cd66a", fontFamily: "monospace", fontSize: "1.3rem"}}>Multi-Core</h4>
                 </div>
                 <div style={styles.multiChefContainer}>
                     {[1, 2, 3, 4,].map((i) => (
-                        <div key={i} style={styles.chef}>👨‍🍳</div>
+                        <div style={{display:"flex", flexDirection:"column", 
+        alignItems: "center",
+		justifyContent: "center",}}>
+							<div key={i} style={{...styles.chef,...styles.chillChef}}>
+								<img src='/src/assets/S03_Group6_Ramsay.png' style={{height: "70px"}}/>
+							</div>
+							<div style={styles.multiOrderQueue}>
+								{Array(4).fill('🥪').map((burger, i) => (
+									<span key={i} style={{ opacity: i < multiCoreOrders * 1 ? 1 : 0.2, transition: "0.2s" }}>{burger}</span>
+								))}
+							</div>
+						</div>
                     ))}
-                </div>
-                <div style={styles.queuesWrapper}>
-                    <div style={styles.multiOrderQueue}>
-                        {Array(4).fill('🥪').map((burger, i) => (
-                            <span key={i} style={{ opacity: i < multiCoreOrders * 1 ? 1 : 0.2, transition: "0.2s" }}>{burger}</span>
-                        ))}
-                    </div>
-                    <div style={styles.multiOrderQueue}>
-                        {Array(4).fill('🥪').map((burger, i) => (
-                            <span key={i} style={{ opacity: i < multiCoreOrders * 1 ? 1 : 0.2, transition: "0.2s" }}>{burger}</span>
-                        ))}
-                    </div>
-                    <div style={styles.multiOrderQueue}>
-                        {Array(4).fill('🥪').map((burger, i) => (
-                            <span key={i} style={{ opacity: i < multiCoreOrders * 1 ? 1 : 0.2, transition: "0.2s" }}>{burger}</span>
-                        ))}
-                    </div>
-                    <div style={styles.multiOrderQueue}>
-                        {Array(4).fill('🥪').map((burger, i) => (
-                            <span key={i} style={{ opacity: i < multiCoreOrders * 1 ? 1 : 0.2, transition: "0.2s" }}>{burger}</span>
-                        ))}
-                    </div>
                 </div>
             </div>
         </div>
@@ -92,7 +115,6 @@ const styles = {
         display: "flex",
         flexDirection: "column",
         alignItems: "center",
-        gap: "1rem",
     },
     header: {
         textAlign: "center",
@@ -101,24 +123,25 @@ const styles = {
     desc: {
         fontSize: "0.85rem",
         color: "var(--mutedS)",
-        margin: 0,
     },
     chefContainer: {
-        height: "100px",
         display: "flex",
         alignItems: "center",
     },
     multiChefContainer: {
-        height: "100px",
+		columnGap:"4rem",
         display: "flex",
         gap: "1rem",
         alignItems: "center",
+		justifyContent: "center",
     },
     chef: {
+		height: "1.5em",
+		width: "1em",
         fontSize: "3rem",
         position: "relative",
         background: "rgba(255,255,255,0.05)",
-        padding: "10px",
+        padding: "5px",
         borderRadius: "10%",
         border: "1px solid rgba(255,255,255,0.1)",
     },
@@ -128,14 +151,14 @@ const styles = {
         boxShadow: "0 0 15px rgba(255, 77, 77, 0.4)",
         animation: "shake 0.5s infinite",
     },
-    speedLine: {
-        position: "absolute",
-        top: "-15px",
-        left: "50%",
-        transform: "translateX(-50%)",
-        fontSize: "1rem",
+    chillChef: {
+        background: "rgba(77, 255, 160, 0.2)",
+        border: "1px solid #71f594",
+        boxShadow: "0 0 15px #1fa64b",
+        animation: "shake 0.5s infinite",
     },
     orderQueue: {
+		marginTop:"8px",
         display: "grid",
         gridTemplateColumns: "repeat(8, 1fr)",
         gap: "5px",
@@ -146,11 +169,12 @@ const styles = {
     },
     queuesWrapper: {
         display: "flex",
-        gap: "1rem",
+        columnGap: "1rem",
         width: "100%",
         justifyContent: "center",
     },
     multiOrderQueue: {
+		margin:"8px",
         display: "grid",
         gridTemplateColumns: "repeat(2, 2fr)",
         gap: "5px",

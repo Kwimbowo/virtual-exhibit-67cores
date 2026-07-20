@@ -1,5 +1,5 @@
-import CpuContainer from '../components/CpuContainer';
-import CpuStatus from '../components/CpuStatus';
+import CpuContainer from './CpuContainer';
+import CpuStatus from './CpuStatus';
 import ControlPanel from './ControlPanel';
 import StatusTable from './StatusTable';
 import { useState } from "react";

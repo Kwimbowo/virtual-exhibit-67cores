@@ -45,6 +45,7 @@ html:has(.multicore-exhibit) body {
     color: var(--textS) !important;
     pointer-events: auto;
     overflow-x: hidden;
+	text-align: justify;
 }
 html:has(.multicore-exhibit) .content__titlemeta h1,
 html:has(.multicore-exhibit) .content__titlemeta p,

@@ -10,25 +10,38 @@ readingTime: "6-7 minutes"
 import InteractiveCpu from '../components/InteractiveCpu.jsx';
 import Background from '../components/S03_Group6_Background.astro';
 import ComparisonTable from '../components/ComparisonTable.jsx';
+import TrendGraph from '../components/TrendGraph.jsx';
+import ChefAnalogy from '../components/ChefAnalogy.jsx';
+import PowerFormula from '../components/PowerFormula.jsx';
 
 <div class="multicore-exhibit">
 <Background />
 
 {/* main article */}
 ## Problem Solving Story
-In the past, computer processors only had a single core which were defined by a single metric, clock speed. Microprocessors possessed only one computational engine which executed instructions sequentially. This meant they could only process one task at a time, working through programs step-by-step in a linear fashion. Computers did exactly what they were told, when they were told. Under a principle known as Dennard scaling, engineers could shrink transistors on a silicon die, allowing them to increase the clock frequency (measured in megahertz and later gigahertz) without a corresponding increase in power density. For a long time, this meant software automatically ran faster with each new hardware generation, requiring no structural changes to the code itself.
+In the past, computer processors only had a single core, which was defined by a single metric: clock speed. Microprocessors possessed only one computational engine which executed instructions sequentially. Computers did exactly what they were told, when they were told. Under a principle known as Dennard scaling, engineers could shrink transistors on a silicon die, allowing them to increase the clock frequency without a corresponding increase in power density.
 
-Over time, however, computers would soon evolve to requiring higher computational power for its more complex needs, such as complex 3D rendering, higher screen resolutions, realt-time computations, etc. This would cause single core processors to hit a severe bottleneck which required processors to scale up its core clock speed. This resulted in massive current leakage, causing CPUs to draw excessive amounts of electrical power and dissipate unsustainable levels of waste heat. Pushing clock speeds higher required exponential increases in voltage, creating a thermal density so high that standard air-cooling solutions could no longer prevent the silicon from melting. This physical barrier became known as the **Power Wall problem**. Concurrently, CPUs hit the Memory Wall, a bottleneck where a single, hyper-fast core spent too many clock cycles idling, waiting for data to arrive from the significantly slower system RAM.
+<TrendGraph client:load />
 
-Around 2005, realizing that a single core could no longer be pushed to higher frequencies without melting the silicon, CPU companies like Intel and AMD started experimenting with something new: putting multiple cores on a single chip. This was a major breakthrough. Instead of forcing a single processor to run at an unstable, high-voltage frequency, engineers integrated two or more distinct computational engines onto a single piece of silicon, allowing the chip to divide and conquer tasks simultaneously.
+However, as the demand for complex 3D rendering and real-time computations grew, single-core processors hit a severe bottleneck. To keep up, manufacturers pushed clock speeds higher, which required exponential increases in voltage. This created a thermal density so high that standard air-cooling solutions could no longer prevent the silicon from melting. This physical barrier became known as the **Power Wall problem**.
 
-The result was a massive increase in computing power. The first dual-core processors hit the market, and while they were revolutionary at the time, they are now considered outdated. Today, quad-core and octa-core processors are standard in phones, laptops, and gaming consoles. They make devices faster and more efficient. Multicore processors changed the way computers work and are the reason modern devices can multitask with ease.
+Around 2005, realizing that a single core could no longer be pushed to higher frequencies without severe overheating, CPU companies like Intel and AMD shifted their approach: putting multiple cores on a single chip.
 
-But how did it work? Multicore processors bypassed the Power Wall by exploiting the physics of dynamic power consumption in CMOS circuits. The relationship between a chip's power and its operational variables is expressed by the formula:
+<ChefAnalogy client:load />
 
-**P = C * V^2 * f**
+Think of a CPU like a restaurant kitchen. A single-core processor is like having one incredibly fast, highly skilled chef. To complete more orders, you have to force that chef to work faster and faster. Eventually, the chef gets exhausted, the kitchen overheats, and they can still only cook one dish at a time.
 
-Where **P** represents power, **C** represents capacitance, **V** represents voltage, and **f** represents frequency. Because power consumption scales quadratically with voltage (**V^2**), running a single core at extreme frequencies requires a high operating voltage that causes power and heat to spike exponentially.By splitting a workload across multiple cores, each individual core can run at a significantly lower frequency (**f**) and a reduced operating voltage (**V**). Because of the quadratic relationship, a slight reduction in voltage yields a massive drop in heat and power usage. This allowed computing throughput to increase through parallel execution without exceeding the thermal and power limits of the chip. The architecture fixed the sequential bottleneck by allowing the operating system to execute entirely separate computing tasks, or distinct threads of the same task, at the exact same time.
+A multicore processor changes the layout. Instead of forcing one chef to work at an impossible speed, you hire four chefs. They can work at a comfortable, moderate pace, but because they are working in parallel (cooking four dishes simultaneously), the total output of the kitchen increases dramatically without anyone overheating.
+
+But how did this solve the Power Wall mathematically? It comes down to the physics of dynamic power consumption in CMOS circuits, expressed by the following formula:
+
+$$ P = C \cdot V^2 \cdot f $$
+
+Where **P** represents power, **C** represents capacitance (a constant based on the chip's physical design), **V** represents voltage, and **f** represents frequency.
+
+<PowerFormula client:load />
+
+Because power consumption scales quadratically with voltage ($V^2$), running a single core at extreme frequencies requires a high operating voltage that causes power and heat to spike exponentially. By splitting a workload across multiple cores, each individual core can run at a significantly lower frequency ($f$) and a reduced operating voltage ($V$). Because of the quadratic relationship, a slight reduction in voltage yields a massive drop in heat and power usage. This allowed computing throughput to increase through parallel execution without exceeding the thermal limits of the silicon.
 
 ## The Multicore CPU
 The transition to multicore architecture originally took root in heavy-duty enterprise and server spaces, with IBM introducing the first commercial non-embedded dual-core processor, the POWER4, in 2001. However, the architecture truly went mainstream in 2005 when Intel released the Pentium D and AMD launched the Athlon 64 X2. This marked a monumental paradigm shift in software development; programmers could no longer rely on hardware engineers to automatically speed up their applications and instead had to learn how to write multi-threaded code to take advantage of parallel computing. Over the past two decades, this has evolved from simple dual-core setups to complex hybrid architectures (like ARM's big.LITTLE or Intel's Performance/Efficient core splits) found in modern smartphones, laptops, and desktop computers.

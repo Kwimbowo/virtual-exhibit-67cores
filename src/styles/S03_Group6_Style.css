@@ -46,15 +46,6 @@ html:has(.multicore-exhibit) body {
     pointer-events: auto;
     overflow-x: hidden;
 }
-
-html:has(.multicore-exhibit) .article{
-    background: transparent !important;
-    border: none !important;
-    box-shadow: none !important;
-    backdrop-filter: none !important;
-    -webkit-backdrop-filter: none !important;
-}
-
 html:has(.multicore-exhibit) .content__titlemeta h1,
 html:has(.multicore-exhibit) .content__titlemeta p,
 html:has(.multicore-exhibit) .header__titleblock,
@@ -117,7 +108,7 @@ html:has(.multicore-exhibit) .exhibitlink:hover{
 .sphere-1 {
     width: 40vw;
     height: 40vw;
-    background: linear-gradient(40deg, rgba(221, 0, 255, 0.434), rgba(255, 102, 0, 0.3));
+    background: linear-gradient(40deg, rgba(221, 0, 255, 0.205), rgba(255, 102, 0, 0.205));
     top: 20%;
     left: -40%;
     animation: float-1 8s ease-in-out infinite;
@@ -126,7 +117,7 @@ html:has(.multicore-exhibit) .exhibitlink:hover{
 .sphere-2 {
     width: 45vw;
     height: 45vw;
-    background: linear-gradient(240deg, rgba(166, 0, 255, 0.432), rgba(0, 183, 255, 0.3));
+    background: linear-gradient(240deg, rgba(166, 0, 255, 0.205), rgba(0, 183, 255, 0.205));
     bottom: 70%;
     right: -5%;
     animation: float-2 9s ease-in-out infinite;
@@ -135,7 +126,7 @@ html:has(.multicore-exhibit) .exhibitlink:hover{
 .sphere-3 {
     width: 30vw;
     height: 30vw;
-    background: linear-gradient(120deg, rgba(133, 89, 255, 0.4), rgba(98, 216, 249, 0.2));
+    background: linear-gradient(120deg, rgba(133, 89, 255, 0.205), rgba(98, 216, 249, 0.205));
     bottom: -40%;
     right: 10%;
     animation: float-1 8s ease-in-out infinite;
@@ -144,7 +135,7 @@ html:has(.multicore-exhibit) .exhibitlink:hover{
 .sphere-4 {
     width: 40vw;
     height: 40vw;
-    background: linear-gradient(40deg, rgba(230, 70, 255, 0.434), rgba(255, 196, 35, 0.3));
+    background: linear-gradient(40deg, rgba(230, 70, 255, 0.205), rgba(255, 196, 35, 0.205));
     bottom: -200%;
     left: -30%;
     animation: float-2 8s ease-in-out infinite;
@@ -153,7 +144,7 @@ html:has(.multicore-exhibit) .exhibitlink:hover{
 .sphere-5 {
     width: 45vw;
     height: 45vw;
-    background: linear-gradient(240deg, rgba(0, 255, 208, 0.363), rgba(0, 183, 255, 0.3));
+    background: linear-gradient(240deg, rgba(0, 255, 208, 0.205), rgba(0, 183, 255, 0.205));
     bottom: -300%;
     right: 0%;
     animation: float-1 9s ease-in-out infinite;
@@ -162,10 +153,20 @@ html:has(.multicore-exhibit) .exhibitlink:hover{
 .sphere-6 {
     width: 30vw;
     height: 30vw;
-    background: linear-gradient(120deg, rgba(133, 89, 255, 0.4), rgba(98, 216, 249, 0.2));
+    background: linear-gradient(120deg, rgba(133, 89, 255, 0.205), rgba(98, 216, 249, 0.205));
     bottom: -375%;
     left: -20%;
     animation: float-2 8s ease-in-out infinite;
+}
+
+.behind-noise{
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgb(34, 37, 48) !important;
+    border-radius: 8px !important;
 }
 
 .noise-overlay {
@@ -295,7 +296,7 @@ html:has(.multicore-exhibit) footer {
     font-family: monospace !important;
 }
 html:has(.multicore-exhibit) .toc{
-    background: rgba(34, 37, 48, 0.15) !important;
+    background: rgba(34, 37, 48, 1) !important;
     backdrop-filter: blur(8px) !important;
     -webkit-backdrop-filter: blur(8px) !important;
     border: 1px solid var(--borderS) !important;

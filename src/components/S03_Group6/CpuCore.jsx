@@ -1,13 +1,16 @@
-export default function CpuCore({ id = "#", active, throttle, ...rest }) {
+export default function CpuCore({ id = "#", active, throttle }) {
     const statusStyle = !active ? styles.inactive : (throttle ? styles.throttle : styles.active);
     const coreStyle = { ...styles.border, ...statusStyle };
-	const coreText = active ? <p style={styles.label}>CORE {id}</p> : null
-    return <>
-        <style>{keyframes}</style>
-        <div style={coreStyle} className={(throttle && active) ? "cpu-core-throttle" : undefined}>
-            {coreText}
-        </div>
-    </>;
+    const coreText = active ? <p style={styles.label}>CORE {id}</p> : null
+
+    return (
+        <>
+            <style>{keyframes}</style>
+            <div style={coreStyle} className={(throttle && active) ? "cpu-core-throttle" : undefined}>
+                {coreText}
+            </div>
+        </>
+    );
 }
 
 const styles = {
@@ -48,8 +51,8 @@ const styles = {
         boxShadow: `
             inset 0 2px 3px rgba(255, 255, 255, 0.6), 
             inset 0 -4px 10px rgba(0, 0, 0, 0.4), 
-            0 0 15px rgba(60, 214, 106, 0.5), 
-            0 6px 10px rgba(0, 0, 0, 0.6)
+            0 0 6px rgba(60, 214, 106, 0.3), 
+            0 4px 6px rgba(0, 0, 0, 0.6)
         `,
     },
     'throttle': {
@@ -59,7 +62,6 @@ const styles = {
     },
 }
 
-// Glowing effect when CPU throttling
 const keyframes = `
 @keyframes throttle-flash {
     0%, 100% { 
@@ -67,16 +69,16 @@ const keyframes = `
         box-shadow: 
             inset 0 2px 3px rgba(255, 255, 255, 0.6), 
             inset 0 -4px 10px rgba(0, 0, 0, 0.4), 
-            0 0 15px rgba(255, 77, 77, 0.6), 
-            0 6px 10px rgba(0, 0, 0, 0.6);
+            0 0 8px rgba(255, 77, 77, 0.4), 
+            0 4px 6px rgba(0, 0, 0, 0.6);
     }
     50% { 
         background-color: #d63030; 
         box-shadow: 
             inset 0 2px 3px rgba(255, 255, 255, 0.4), 
             inset 0 -4px 10px rgba(0, 0, 0, 0.5), 
-            0 0 25px rgba(214, 48, 48, 0.9), 
-            0 6px 10px rgba(0, 0, 0, 0.6);
+            0 0 16px rgba(214, 48, 48, 0.6), 
+            0 4px 6px rgba(0, 0, 0, 0.6);
     }
 }
 .cpu-core-throttle {

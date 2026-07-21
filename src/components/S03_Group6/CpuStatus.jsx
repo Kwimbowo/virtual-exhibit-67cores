@@ -1,7 +1,5 @@
-export default function CpuStatus({throttle=false, executionTime=0, ...rest}) {
-    const safeMsg = <>Running efficiently within thermal limits.<br />⁠</>;
-    const badMsg = <>CPU is overheating! Clock speeds reduced to stay within thermal limits. <br />
-    Efficiency heavily penalized.</>;
+export default function CpuStatus({throttle=false, executionTime=0, power=0, efficiency=0, effectiveClock=0, energyScore=0}) {    const safeMsg = "Running efficiently within thermal limits.";
+    const badMsg = "CPU is overheating! Clock speeds reduced to stay within thermal limits.";
     const status = throttle ? badMsg : safeMsg;
 
     const messageStyle = {
@@ -12,16 +10,32 @@ export default function CpuStatus({throttle=false, executionTime=0, ...rest}) {
     return (
         <div style={styles.container}>
             <style>{keyframes}</style>
-            <div style={messageStyle} className={throttle ? "status-text-blink" : undefined}>
-                {/* Execution Time */}
-                <div style={styles.execution}>
-                    Execution Time: <span style={styles.timeValue}>{executionTime.toFixed(1)}s</span>
-                </div>
 
-                {/* Status Message */}
-                <div style={styles.textBody}>
-                    {status}
+            <div style={styles.metricsGrid}>
+                <div style={styles.metricBox}>
+                    <div style={styles.metricLabel}>Effective Clock</div>
+                    <div style={styles.metricValue}>{effectiveClock} GHz</div>
                 </div>
+                <div style={styles.metricBox}>
+                    <div style={styles.metricLabel}>Efficiency</div>
+                    <div style={styles.metricValue}>{efficiency}%</div>
+                </div>
+                <div style={styles.metricBox}>
+                    <div style={styles.metricLabel}>Execution Time</div>
+                    <div style={styles.metricValue}>{executionTime.toFixed(1)} s</div>
+                </div>
+                <div style={styles.metricBox}>
+                    <div style={styles.metricLabel}>Actual Power</div>
+                    <div style={styles.metricValue}>{power.toFixed(1)} W</div>
+                </div>
+                <div style={styles.metricBox}>
+                    <div style={styles.metricLabel}>Energy Score</div>
+                    <div style={styles.metricValue}>{energyScore} J</div>
+                </div>
+            </div>
+
+            <div style={messageStyle} className={throttle ? "status-text-blink" : undefined}>
+                {status}
             </div>
         </div>
     );
@@ -30,24 +44,48 @@ export default function CpuStatus({throttle=false, executionTime=0, ...rest}) {
 const styles = {
     container: {
         width: "100%",
-        fontSize: '1.1rem',
-        textAlign: 'center',
         display: 'flex',
-        justifyContent: 'center',
-        padding: '16px 0'
+        flexDirection: 'column',
+        gap: '12px',
+    },
+    metricsGrid: {
+        display: "grid",
+        gridTemplateColumns: "repeat(5, 1fr)",
+        gap: "10px",
+        width: "100%",
+    },
+    metricBox: {
+        background: "linear-gradient(135deg, #373c43 0%, #22262a 100%)",
+        border: "1px solid rgba(255, 255, 255, 0.05)",
+        borderRadius: "12px",
+        padding: "12px 8px",
+        textAlign: "center",
+        boxShadow: "inset 0 1px 1px rgba(255,255,255,0.1), 0 4px 6px rgba(0,0,0,0.3)",
+    },
+    metricLabel: {
+        fontSize: "0.75rem",
+        color: "#a0a5aa",
+        textTransform: "uppercase",
+        letterSpacing: "0.5px",
+        marginBottom: "4px",
+        fontWeight: "600",
+    },
+    metricValue: {
+        fontSize: "1.1rem",
+        color: "#ffffff",
+        fontWeight: "800",
+        fontFamily: "monospace",
     },
     message: {
         width: "100%",
-        maxWidth: "600px",
-        padding: "16px 24px",
+        padding: "12px 24px",
         borderRadius: "12px",
-        display: "flex",
-        flexDirection: "column",
-        justifyContent: "center",
-        alignItems: "center",
+        textAlign: "center",
         fontFamily: "monospace",
+        fontSize: "0.95rem",
         border: "1px solid rgba(0, 0, 0, 0.4)",
         transition: "all 0.3s ease",
+        boxSizing: "border-box",
     },
     messageSafe: {
         background: "#16191b",
@@ -60,21 +98,6 @@ const styles = {
         color: "#ff4d4d",
         textShadow: "0 0 8px rgba(255, 77, 77, 0.6)",
         boxShadow: "inset 0 3px 6px rgba(0,0,0,0.9), 0 0 15px rgba(214, 48, 48, 0.3)",
-    },
-    execution: {
-        fontWeight: '800',
-        fontSize: '1.25rem',
-        marginBottom: "10px",
-        letterSpacing: "0.5px"
-    },
-    timeValue: {
-        color: "#ffffff",
-        textShadow: "none"
-    },
-    textBody: {
-        fontSize: "0.95rem",
-        lineHeight: "1.4",
-        opacity: 0.9
     }
 };
 

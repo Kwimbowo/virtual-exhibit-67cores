@@ -33,91 +33,91 @@ export default function ControlPanel({onChange, defaultCores = 4, defaultClock =
   };
 
   return (
-    <div style={styles.panel}>
-      <Row label="Active Cores">
-        <Slider
-          min={1}
-          max={8}
-          step={1}
-          value={cores}
-          onChange={handleCores}
-          display={cores}
-        />
-      </Row>
-
-      <Row label="Clock Speed (GHz)">
-        <Slider
-          min={1.0}
-          max={5.5}
-          step={0.1}
-          value={clock}
-          onChange={handleClock}
-          display={clock.toFixed(1)}
-        />
-      </Row>
-
-      <Row label="Cooling Solution (TDP)">
-        <div style={styles.segmentGroup}>
-          <div 
-            style={{
-              ...styles.slidingPill,
-              left: `calc(${(TDP_OPTIONS.findIndex(opt => opt.value === tdp) / TDP_OPTIONS.length) * 100}% + 3px)`
-            }} 
+      <div style={styles.panel}>
+        <Row label="Active Cores">
+          <Slider
+              min={1}
+              max={8}
+              step={1}
+              value={cores}
+              onChange={handleCores}
+              display={cores}
           />
-          {TDP_OPTIONS.map((opt, i) => {
-            const selected = tdp === opt.value;
-            return (
-              <button
-                key={opt.value}
-                type="button"
-                onClick={() => handleTdp(opt.value)}
-                aria-pressed={selected}
+        </Row>
+
+        <Row label="Clock Speed (GHz)">
+          <Slider
+              min={1.0}
+              max={5.5}
+              step={0.1}
+              value={clock}
+              onChange={handleClock}
+              display={clock.toFixed(1)}
+          />
+        </Row>
+
+        <Row label="Cooling Solution (TDP)">
+          <div style={styles.segmentGroup}>
+            <div
                 style={{
-                  ...styles.segmentButton,
-                  color: selected ? "#ffffff" : "#686868",
+                  ...styles.slidingPill,
+                  left: `calc(${(TDP_OPTIONS.findIndex(opt => opt.value === tdp) / TDP_OPTIONS.length) * 100}% + 3px)`
                 }}
-              >
-                {opt.label}
-              </button>
-            );
-          })}
-        </div>
-      </Row>
-    </div>
+            />
+            {TDP_OPTIONS.map((opt) => {
+              const selected = tdp === opt.value;
+              return (
+                  <button
+                      key={opt.value}
+                      type="button"
+                      onClick={() => handleTdp(opt.value)}
+                      aria-pressed={selected}
+                      style={{
+                        ...styles.segmentButton,
+                        color: selected ? "#ffffff" : "#686868",
+                      }}
+                  >
+                    {opt.label}
+                  </button>
+              );
+            })}
+          </div>
+        </Row>
+      </div>
   );
 }
 
 function Row({ label, children }) {
   return (
-    <div style={styles.row}>
-      <span style={styles.label}>{label}</span>
-      <div style={styles.control}>{children}</div>
-    </div>
+      <div style={styles.row}>
+        <span style={styles.label}>{label}</span>
+        <div style={styles.control}>{children}</div>
+      </div>
   );
 }
 
 function Slider({ min, max, step, value, onChange, display }) {
   const percentage = ((value - min) / (max - min)) * 100;
   return (
-    <div style={styles.sliderGroup}>
-      <input
-        type="range"
-        min={min}
-        max={max}
-        step={step}
-        value={value}
-        onChange={onChange}
-        style={{
-          ...styles.slider,
-          background: `linear-gradient(90deg, 
+      <div style={styles.sliderGroup}>
+        <input
+            type="range"
+            min={min}
+            max={max}
+            step={step}
+            value={value}
+            onChange={onChange}
+            style={{
+              ...styles.slider,
+              background: `linear-gradient(90deg, 
             rgba(60, 175, 214, 0.25) 0%, 
             rgba(60, 175, 214, 0.1) ${percentage}%, 
             #16191b ${percentage}%, 
             #16191b 100%)`
-        }}
-      />
-      <span style={styles.valueTag}>{display}</span>
-    </div>
+            }}
+        />
+        <span style={styles.valueTag}>{display}</span>
+      </div>
   );
 }
 
@@ -125,28 +125,28 @@ const styles = {
   panel: {
     display: "flex",
     flexDirection: "column",
-    gap: 28,
+    gap: 12,
     fontFamily: "Noto Sans Variable, sans-serif",
     fontWeight: "600",
     width: "100%",
     boxSizing: "border-box",
     contain: "inline-size",
     background: "linear-gradient(135deg, #373c43 0%, #22262a 100%)",
-    padding: "32px",
-    borderRadius: "24px",
+    padding: "16px",
+    borderRadius: "16px",
     border: "1px solid rgba(255, 255, 255, 0.05)",
-    boxShadow: "0 20px 40px rgba(0,0,0,0.5), inset 0 1px 1px rgba(255,255,255,0.1)",
+    boxShadow: "0 10px 20px rgba(0,0,0,0.5), inset 0 1px 1px rgba(255,255,255,0.1)",
   },
   row: {
     display: "flex",
     alignItems: "center",
-    gap: 24,
+    gap: 12,
     flexWrap: "wrap",
   },
   label: {
-    fontSize: "1.05rem",
+    fontSize: "0.95rem",
     color: "#a0a5aa",
-    minWidth: 210,
+    minWidth: 160,
     flexShrink: 0,
     textShadow: "0 -1px 0 rgba(0,0,0,0.5)",
   },
@@ -166,13 +166,12 @@ const styles = {
     border: "1px solid rgba(0, 0, 0, 0.4)",
     borderRadius: 14,
     padding: "6px 14px",
-    fontSize: "1rem",
+    fontSize: "0.95rem",
     color: "#ffffff",
     textShadow: "0 -1px 0 rgba(0, 0, 0, 0.8), 0 1px 1px rgba(255, 255, 255, 0.2)",
     flexShrink: 0,
     boxShadow: "inset 0 1px 1px rgba(255,255,255,0.15), 0 4px 6px rgba(0,0,0,0.3)",
   },
-  
   slider: {
     flex: 1,
     minWidth: 0,
@@ -197,7 +196,7 @@ const styles = {
     position: "absolute",
     top: 3,
     bottom: 3,
-    width: "calc(33% - 6px)", 
+    width: "calc(33% - 6px)",
     borderRadius: 11,
     zIndex: 0,
     background: "linear-gradient(180deg, #535a61 0%, #363b40 100%)",
@@ -209,8 +208,8 @@ const styles = {
     flex: 1,
     border: "none",
     background: "transparent",
-    padding: "12px 0",
-    fontSize: "1rem",
+    padding: "6px 0",
+    fontSize: "0.9rem",
     fontWeight: "700",
     cursor: "pointer",
     zIndex: 1,

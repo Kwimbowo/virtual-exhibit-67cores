@@ -1,7 +1,6 @@
-import CpuContainer from './CpuContainer';
-import CpuStatus from './CpuStatus';
-import ControlPanel from './ControlPanel';
-import StatusTable from './StatusTable';
+import CpuContainer from './CpuContainer.jsx';
+import CpuStatus from './CpuStatus.jsx';
+import ControlPanel from './ControlPanel.jsx';
 import { useState } from "react";
 
 /*
@@ -16,21 +15,17 @@ energyScore = actualPower × execTime
 */
 
 export default function InteractiveCpu() {
-    // Reactive states
     const [cores, setCores] = useState(5);
     const [clock, setClock] = useState(3.0);
     const [tdp, setTdp] = useState(100);
-    
-    // Computed vals
     const WORKLOAD = 5000;
     const basePower = cores * clock**2 * 1.5 + cores * 5;
     const throttle = basePower > tdp;
-    const effectiveClock = throttle ? clock * Math.sqrt(tdp / basePower) : clock
+    const effectiveClock = throttle ? clock * Math.sqrt(tdp / basePower) : clock;
     const actualPower = throttle ? tdp : basePower;
     const efficiency = throttle ? tdp / basePower : 1.0;
     const execTime = WORKLOAD / (cores * effectiveClock * efficiency);
     const energyScore = actualPower * execTime;
-
 
     const handlePanelChange = ({ cores, clock, tdp }) => {
         setCores(cores);
@@ -38,41 +33,37 @@ export default function InteractiveCpu() {
         setTdp(tdp);
     };
 
-    return <div style={styles.container}>
-        {/* Main cores */}
-        <CpuContainer 
-            activeCount={cores} 
-            throttle={throttle} 
-            power={actualPower}
-            efficiency={Math.round(efficiency * 100)}
-            executionTime = {execTime}
-        />
+    return (
+        <div style={styles.container}>
+            <CpuContainer
+                activeCount={cores}
+                throttle={throttle}
+            />
 
-        {/* Status of cpu */}
-        <CpuStatus 
-            throttle={throttle}
-            executionTime = {execTime}
-        />
+            <CpuStatus
+                throttle={throttle}
+                executionTime={execTime}
+                power={actualPower}
+                efficiency={Math.round(efficiency * 100)}
+                effectiveClock={Math.round(effectiveClock * 100) / 100}
+                energyScore={Math.round(energyScore)}
+            />
 
-        {/* Table of extra values */}
-        <StatusTable
-            throttle={throttle} 
-            effectiveClock={Math.round(effectiveClock * 100)/100}
-            energyScore={Math.round(energyScore)}
-        />
-
-        {/* Control Panel */}
-        <ControlPanel
-            defaultCores={cores}
-            defaultClock={clock}
-            defaultTdp={tdp}
-            onChange={handlePanelChange}
-        />
-    </div>
+            <ControlPanel
+                defaultCores={cores}
+                defaultClock={clock}
+                defaultTdp={tdp}
+                onChange={handlePanelChange}
+            />
+        </div>
+    );
 }
 
 const styles = {
     container: {
         minWidth: "700px",
+        display: "flex",
+        flexDirection: "column",
+        gap: "16px"
     }
-}
+};

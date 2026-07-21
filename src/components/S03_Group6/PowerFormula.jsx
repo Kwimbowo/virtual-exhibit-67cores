@@ -1,180 +1,236 @@
 import { useState } from "react";
 
 export default function PowerFormula() {
-  const [voltage, setVoltage] = useState(1.2);
-  const [frequency, setFrequency] = useState(3.0);
-  const [capacitance, setCapacitance] = useState(40);
+	const [voltage, setVoltage] = useState(1.2);
+	const [frequency, setFrequency] = useState(3.0);
+	const [capacitance, setCapacitance] = useState(15);
 
-  const power = (capacitance * voltage ** 2 * frequency).toFixed(2);
-  const maxPower = 100*1.5 ** 2 * 5.0;
-  const powerPercent = (Number(power) / maxPower) * 100;
+	// Math fixed: Capacitance capped at 25 brings max power to realistic 281.25W
+	const power = (capacitance * voltage ** 2 * frequency).toFixed(2);
+	const maxPower = 25 * 1.5 ** 2 * 5.0;
+	const powerPercent = (Number(power) / maxPower) * 100;
 
-  return (
-    <div style={styles.container}>
-      <div style={styles.formulaBox}>
-        <span style={{ color:"#a0a5aa"}}>Total Power = </span>
-        <span style={{ color:"white"}}>Capacitance × </span>
-        <span style={{color:"#ff4d4d",fontWeight:"bold",textShadow:"0 0 8px rgba(255,77,77,.6)"}}>Voltage²</span>
-        <span style={{color:"white"}}> × </span>
-        <span style={{color:"#3cd66a",textShadow:"0 0 6px rgba(60,214,106,.4)"}}>Frequency</span>
-      </div>
-
-      <div style={styles.controls}>
-        <div style={styles.controlGroup}>
-          <label style={styles.label}>Capacitance: <span style={{color:"#ffffff"}}>{capacitance.toFixed(2)}F</span></label>
-          <Slider min={5} max={100} step={0.01} value={capacitance}
-            onChange={e=>setCapacitance(Number(e.target.value))}
-            display={`${capacitance.toFixed(2)}F`} accentColor="#ffffff"/>
-        </div>
-
-        <div style={styles.controlGroup}>
-          <label style={styles.label}>Voltage: <span style={{color:"#ff4d4d"}}>{voltage.toFixed(2)}V</span></label>
-          <Slider min={0.8} max={1.5} step={0.01} value={voltage}
-            onChange={e=>setVoltage(Number(e.target.value))}
-            display={`${voltage.toFixed(2)}V`} accentColor="#ff4d4d"/>
-        </div>
-
-        <div style={styles.controlGroup}>
-          <label style={styles.label}>Frequency: <span style={{color:"#3cd66a"}}>{frequency.toFixed(2)}GHz</span></label>
-          <Slider min={1} max={5} step={0.01} value={frequency}
-            onChange={e=>setFrequency(Number(e.target.value))}
-            display={`${frequency.toFixed(2)} GHz`} accentColor="#3cd66a"/>
-        </div>
-      </div>
-
-      <div style={styles.resultBox}>
-		<h4>Resulting Power Output</h4>
-		<div style={styles.barRow}>
-			<div style={styles.barBackground}>
-			<div style={{
-				...styles.barFill,
-				textAlign:"center",
-				width: `${powerPercent}%`,
-				background: powerPercent > 75 ? "#ff4d4d" : powerPercent > 40 ? "#eab308" : "#3cd66a",
-				boxShadow: powerPercent > 75 ? "0 0 20px rgba(255,77,77,.6)" : "none",
-			}} />
+	return (
+		<div style={styles.container}>
+			<div style={styles.formulaBox}>
+				<span style={{ color:"#a0a5aa"}}>Total Power = </span>
+				<span style={{ color:"white"}}>Capacitance × </span>
+				<span style={{color:"#ff4d4d",fontWeight:"bold",textShadow:"0 0 8px rgba(255,77,77,.6)"}}>Voltage²</span>
+				<span style={{color:"white"}}> × </span>
+				<span style={{color:"#3cd66a",textShadow:"0 0 6px rgba(60,214,106,.4)"}}>Frequency</span>
 			</div>
-			<span style={styles.barValue}>{power}W</span>
+
+			{/* Collapsible Info Panel */}
+			<details style={styles.accordion}>
+				<summary style={styles.accordionSummary}>
+					<span style={{marginRight: "6px"}}> </span>What do these variables mean?
+				</summary>
+				<div style={styles.accordionContent}>
+					<p style={styles.accordionText}>
+						<strong style={{color: "#ffffff"}}>Capacitance (C):</strong> Represents the physical size and number of transistors. This is mostly fixed by the physical chip design.
+					</p>
+					<p style={styles.accordionText}>
+						<strong style={{color: "#ff4d4d"}}>Voltage (V):</strong> The electrical pressure. Because it scales <strong>quadratically (V²)</strong>, even slight increases cause massive heat spikes.
+					</p>
+					<p style={styles.accordionText}>
+						<strong style={{color: "#3cd66a"}}>Frequency (f):</strong> The clock speed, or billions of cycles per second. Increasing this scales the power linearly.
+					</p>
+				</div>
+			</details>
+
+			<div style={styles.controls}>
+				{/* Capacitance Control */}
+				<div style={styles.controlGroup}>
+					<div style={styles.labelRow}>
+						<label style={styles.label}>Capacitance (C): <span style={{color:"#ffffff"}}>{capacitance.toFixed(1)}</span></label>
+					</div>
+					<Slider min={5} max={25} step={0.1} value={capacitance}
+					        onChange={e=>setCapacitance(Number(e.target.value))}
+					        display={`${capacitance.toFixed(1)}`} accentColor="#ffffff"/>
+				</div>
+
+				{/* Voltage Control */}
+				<div style={styles.controlGroup}>
+					<div style={styles.labelRow}>
+						<label style={styles.label}>Voltage (V): <span style={{color:"#ff4d4d"}}>{voltage.toFixed(2)}V</span></label>
+					</div>
+					<Slider min={0.8} max={1.5} step={0.01} value={voltage}
+					        onChange={e=>setVoltage(Number(e.target.value))}
+					        display={`${voltage.toFixed(2)}V`} accentColor="#ff4d4d"/>
+				</div>
+
+				{/* Frequency Control */}
+				<div style={styles.controlGroup}>
+					<div style={styles.labelRow}>
+						<label style={styles.label}>Frequency (f): <span style={{color:"#3cd66a"}}>{frequency.toFixed(2)}GHz</span></label>
+					</div>
+					<Slider min={1} max={5} step={0.01} value={frequency}
+					        onChange={e=>setFrequency(Number(e.target.value))}
+					        display={`${frequency.toFixed(2)} GHz`} accentColor="#3cd66a"/>
+				</div>
+			</div>
+
+			<div style={styles.resultBox}>
+				<h4 style={styles.resultLabel}>Resulting Power Output</h4>
+				<div style={styles.barRow}>
+					<div style={styles.barBackground}>
+						<div style={{
+							...styles.barFill,
+							width: `${powerPercent}%`,
+							background: powerPercent > 75 ? "#ff4d4d" : powerPercent > 40 ? "#eab308" : "#3cd66a",
+							boxShadow: powerPercent > 75 ? "0 0 20px rgba(255,77,77,.6)" : "none",
+						}} />
+					</div>
+					<span style={styles.barValue}>{power}W</span>
+				</div>
+			</div>
 		</div>
-		</div>
-    </div>
-  );
+	);
 }
 
 function Slider({min,max,step,value,onChange,display,accentColor="#3cafd6"}){
 	const p=((value-min)/(max-min))*100;
 	return <div style={styles.sliderGroup}>
-			<input type="range" min={min} max={max} step={step} value={value} onChange={onChange}
-			style={{...styles.slider,accentColor,
-			background:`linear-gradient(90deg,${accentColor}40 0%,${accentColor}20 ${p}%,#16191b ${p}%,#16191b 100%)`}}/>
-			<span style={styles.valueTag}>{display}</span>
-		</div>;
+		<input type="range" min={min} max={max} step={step} value={value} onChange={onChange}
+		       style={{...styles.slider,accentColor,
+				   background:`linear-gradient(90deg,${accentColor}40 0%,${accentColor}20 ${p}%,#16191b ${p}%,#16191b 100%)`}}/>
+		<span style={styles.valueTag}>{display}</span>
+	</div>;
 }
 
 const styles={
-container:{
-	display:"flex",
-	flexDirection:"column",
-	gap:28,
-	fontFamily:"Noto Sans Variable,sans-serif",
-	fontWeight:600,
-	background:"linear-gradient(135deg,#373c43,#22262a)",
-	padding:32,
-	borderRadius:24,
-	border:"1px solid rgba(255,255,255,.05)",
-	boxShadow:"0 20px 40px rgba(0,0,0,.5), inset 0 1px 1px rgba(255,255,255,.1)"
-},
-formulaBox:
-{
-	fontSize:"2rem",
-	textAlign:"center",
-	fontFamily:"monospace",
-	padding:"1rem",
-	background:"#16191b",
-	borderRadius:8,
-	border:"1px solid var(--borderS)"
-},
-controls:
-{
-	display:"flex",
-	gap:"2rem",
-	flexWrap:"wrap"
-},
-controlGroup:
-{
-	flex:"1 1 250px",
-	display:"flex",
-	flexDirection:"column",
-	gap:12
-},
-label:
-{
-	fontWeight:600,
-	fontSize:"1.05rem",
-	color:"#a0a5aa"
-},
-sliderGroup:
-{
-	display:"flex",
-	alignItems:"center",
-	gap:16
-},
-valueTag:
-{
-	minWidth:60,
-	textAlign:"center",
-	background:"linear-gradient(180deg,#4a5056,#2d3238)",
-	border:"1px solid rgba(0,0,0,.4)",
-	borderRadius:14,
-	padding:"6px 14px",
-	color:"#fff",
-	boxShadow:"inset 0 1px 1px rgba(255,255,255,.15),0 4px 6px rgba(0,0,0,.3)"
-},
-slider:{
-	flex:1,
-	height:8,
-	appearance:"none",
-	borderRadius:999,
-	cursor:"pointer",
-	boxShadow:"inset 0 2px 4px rgba(0,0,0,.6),0 1px 1px rgba(255,255,255,.05)"
-},
-resultBox:{
-	marginTop:16
-},
-barBackground:{
-	width:"100%",
-	height:30,
-	background:"#16191b",
-	borderRadius:15,
-	overflow:"hidden",
-	border:"1px solid rgba(255,255,255,.1)"
-},
-barFill: {
-  height: "100%",
-  display: "flex",
-  alignItems: "center",
-  justifyContent: "center",
-  fontWeight: "bold",
-  color: "#fff",
-  transition: "all .3s cubic-bezier(.4,0,.2,1)",
-  textShadow: "0 1px 4px rgba(0,0,0,0.6)",
-  whiteSpace: "nowrap",
-  boxSizing: "border-box",
-},
-barRow: {
-  display: "flex",
-  alignItems: "center",
-  gap: 12,
-},
-barValue: {
-  minWidth: 80,
-  textAlign: "center",
-  background: "linear-gradient(180deg, #4a5056, #2d3238)",
-  border: "1px solid rgba(0, 0, 0, .4)",
-  borderRadius: 14,
-  padding: "6px 14px",
-  color: "#fff",
-  boxShadow: "inset 0 1px 1px rgba(255,255,255,.15), 0 4px 6px rgba(0,0,0,.3)",
-  fontWeight: "bold",
-  fontSize: "1rem",
-}}
+	container:{
+		display:"flex",
+		flexDirection:"column",
+		gap: 18,
+		fontFamily:"Noto Sans Variable,sans-serif",
+		fontWeight:600,
+		background:"linear-gradient(135deg,#373c43,#22262a)",
+		padding: 24,
+		borderRadius:16,
+		border:"1px solid rgba(255,255,255,.05)",
+		boxShadow:"0 15px 30px rgba(0,0,0,.4), inset 0 1px 1px rgba(255,255,255,.1)"
+	},
+	formulaBox: {
+		fontSize: "1.4rem",
+		textAlign:"center",
+		fontFamily:"monospace",
+		padding: "0.75rem",
+		background:"#16191b",
+		borderRadius:8,
+		border:"1px solid var(--borderS)",
+		marginBottom: "-6px"
+	},
+	accordion: {
+		background: "rgba(0, 0, 0, 0.2)",
+		border: "1px solid rgba(255, 255, 255, 0.05)",
+		borderRadius: "8px",
+		overflow: "hidden",
+	},
+	accordionSummary: {
+		padding: "10px 16px",
+		cursor: "pointer",
+		color: "#a0a5aa",
+		fontSize: "0.9rem",
+		fontWeight: 600,
+		userSelect: "none",
+	},
+	accordionContent: {
+		padding: "0 16px 12px 16px",
+		display: "flex",
+		flexDirection: "column",
+		gap: "8px",
+	},
+	accordionText: {
+		margin: 0,
+		color: "var(--mutedS)",
+		fontSize: "0.85rem",
+		fontWeight: 400,
+		lineHeight: "1.4",
+	},
+	controls: {
+		display:"flex",
+		gap:"1.5rem",
+		flexWrap:"wrap"
+	},
+	controlGroup: {
+		flex:"1 1 200px",
+		display:"flex",
+		flexDirection:"column",
+		gap: 10
+	},
+	labelRow: {
+		display: "flex",
+		justifyContent: "space-between",
+		alignItems: "center"
+	},
+	label: {
+		fontWeight:600,
+		fontSize:"0.95rem",
+		color:"#a0a5aa"
+	},
+	sliderGroup: {
+		display:"flex",
+		alignItems:"center",
+		gap: 12
+	},
+	valueTag: {
+		minWidth:60,
+		textAlign:"center",
+		background:"linear-gradient(180deg,#4a5056,#2d3238)",
+		border:"1px solid rgba(0,0,0,.4)",
+		borderRadius:12,
+		padding:"4px 10px",
+		color:"#fff",
+		fontSize: "0.9rem",
+		boxShadow:"inset 0 1px 1px rgba(255,255,255,.15),0 4px 6px rgba(0,0,0,.3)"
+	},
+	slider: {
+		flex:1,
+		height:6,
+		appearance:"none",
+		borderRadius:999,
+		cursor:"pointer",
+		boxShadow:"inset 0 2px 4px rgba(0,0,0,.6),0 1px 1px rgba(255,255,255,.05)"
+	},
+	resultBox: {
+		marginTop: 8
+	},
+	resultLabel: {
+		margin: "0 0 8px 0",
+		color: "var(--textS)",
+		textTransform: "uppercase",
+		fontSize: "0.85rem",
+		letterSpacing: "1px"
+	},
+	barBackground: {
+		width:"100%",
+		height: 24,
+		background:"#16191b",
+		borderRadius:12,
+		overflow:"hidden",
+		border:"1px solid rgba(255,255,255,.1)"
+	},
+	barFill: {
+		height: "100%",
+		display: "flex",
+		transition: "all .3s cubic-bezier(.4,0,.2,1)"
+	},
+	barRow: {
+		display: "flex",
+		alignItems: "center",
+		gap: 12,
+	},
+	barValue: {
+		minWidth: 80,
+		textAlign: "center",
+		background: "linear-gradient(180deg, #4a5056, #2d3238)",
+		border: "1px solid rgba(0, 0, 0, .4)",
+		borderRadius: 12,
+		padding: "4px 10px",
+		color: "#fff",
+		boxShadow: "inset 0 1px 1px rgba(255,255,255,.15), 0 4px 6px rgba(0,0,0,.3)",
+		fontWeight: "bold",
+		fontSize: "0.95rem",
+	}
+}

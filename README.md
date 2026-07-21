@@ -95,12 +95,26 @@ energyScore = actualPower × execTime
 ![thermal throttling](https://github.com/Kwimbow/ARCH2/blob/main/public/style-guide-ref-2.png)
 
 ## References:
-- https://en.wikipedia.org/wiki/Multi-core_processor
-- https://www.cs.utexas.edu/~lin/cs380p/Free_Lunch.pdf
-- https://www.edn.com/future-of-computers-part-2-the-power-wall/ 
-- https://en.wikipedia.org/wiki/Voltage_and_frequency_scaling
-- https://www.sciencedirect.com/topics/computer-science/dynamic-power-consumption
-- https://www.sciencedirect.com/topics/computer-science/total-execution-time
-- https://76services.co.uk/thermal-throttling/thermal-throttling-vs-power-limit-throttling/
-- https://www.sciencedirect.com/topics/computer-science/dynamic-voltage-and-frequency-scaling
-- https://www.microchipusa.com/electrical-components/cpu-power-dissipation
+1. **Cass, S.** (2024, Mar 15). Chip Hall of Fame: Intel 4004. *IEEE Spectrum*. [Link](https://spectrum.ieee.org/chip-hall-of-fame-intel-4004-microprocessor)
+2. **Des, & Des.** (2023, Jul 28). Thermal Throttling vs Power Limit Throttling. *76 Services*. [Link](https://76services.co.uk/thermal-throttling/thermal-throttling-vs-power-limit-throttling/)
+3. **Fish, R.** (2012, Jan 6). Future of computers – Part 2: The Power Wall. *EDN*. [Link](https://www.edn.com/future-of-computers-part-2-the-power-wall/)
+4. **Guru3D.** (2014). Intel Core i7-980X. [Link](https://www.guru3d.com/review/intel-core-i7-980x-review/)
+5. **Harris, D. M., & Harris, S. L.** (2012). From zero to one. *Elsevier eBooks* (pp. 2–52). [Link](https://doi.org/10.1016/b978-0-12-394424-5.00001-x)
+6. **Koren, I., & Krishna, C.** (2011). Temperature-aware computing. *Sustainable Computing*, 1(1), 46–56. [Link](https://doi.org/10.1016/j.suscom.2010.10.004)
+7. **Microchip USA.** (n.d.). CPU power dissipation. [Link](https://www.microchipusa.com/electrical-components/cpu-power-dissipation)
+8. **OkQubit.** (n.d.). IBM POWER4 MCM package. [Link](https://www.okqubit.net/power4/)
+9. **Rajagopal, S. M., et al.** (2023). FedSDM for ECG data. *Internet of Things*, 22, 100784. [Link](https://doi.org/10.1016/j.iot.2023.100784)
+10. **Rupp, K.** (2018, Feb 15). 42 Years of Microprocessor Trend Data. [Link](https://www.karlrupp.net/2018/02/42-years-of-microprocessor-trend-data/)
+11. **ServeTheHome.** (2019, Nov 25). AMD Ryzen Threadripper 3970X. [Link](https://www.servethehome.com/amd-ryzen-threadripper-3970x-review-32-cores-of-madness/)
+12. **Sheikh, H. F., et al.** (2011). Thermal-aware scheduling techniques. *Sustainable Computing*, 2(3), 151–169. [Link](https://doi.org/10.1016/j.suscom.2011.06.005)
+13. **Sutter, H.** (2009). The Free Lunch Is Over. *Dr. Dobb's Journal*. [Link](https://www.cs.utexas.edu/~lin/cs380p/Free_Lunch.pdf)
+14. **Team, R.** (2025, Dec 27). Single-Core vs Multi-Core CPUs. *RevisionDojo*. [Link](https://www.revisiondojo.com/blog/single-core-vs-multi-core-processors-explained)
+15. **TechPowerUp.** (n.d.). AMD Athlon 64 X2 4200+. [Link](https://www.techpowerup.com/cpu-specs/athlon-64-x2-4200.c475)
+16. **TechPowerUp.** (n.d.). AMD Phenom II X6 1090T BE. [Link](https://www.techpowerup.com/cpu-specs/phenom-ii-x6-1090t-be.c670)
+17. **TechPowerUp.** (n.d.). AMD Ryzen 7 1700X. [Link](https://www.techpowerup.com/cpu-specs/ryzen-7-1700x.c1892)
+18. **TechPowerUp.** (n.d.). Intel Core 2 Quad Q6600. [Link](https://www.techpowerup.com/cpu-specs/core-2-quad-q6600-95w.c403)
+19. **TechPowerUp.** (n.d.). Intel Pentium D 920. [Link](https://www.techpowerup.com/cpu-specs/pentium-d-920.c327)
+20. **TweakTown.** (2020, Nov 3). AMD Ryzen 9 3950X. [Link](https://www.tweaktown.com/reviews/9255/amd-ryzen-9-3950x-zen-2-processor-review/index.html)
+21. **Venu, B.** (2011). Multi-core processors – An overview. *arXiv*. [Link](https://arxiv.org/abs/1110.3535)
+22. **Wikipedia.** (2026, Jun 18). Alder Lake. [Link](https://en.wikipedia.org/wiki/Alder_Lake)
+23. **Wikipedia.** (2026, Feb 2). Athlon 64 X2. [Link](https://en.wikipedia.org/wiki/Athlon_64_X2)

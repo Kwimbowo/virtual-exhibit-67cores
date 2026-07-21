@@ -5,7 +5,7 @@ export default function ComparisonTable() {
     <div className="table">
       <div className="panel">
         <div className="singlecoreheader">
-          Single Core Processor
+          Singlecore Processor
         </div>
 
         <ul className="list">
@@ -13,7 +13,7 @@ export default function ComparisonTable() {
             A <span className="bold">singular</span> core executes instructions
           </li>
           <li>
-            <span className="bold">Lacks multi-core efficiency</span>, leaving
+            <span className="bold">Lacks multicore efficiency</span>, leaving
             tasks to be done sequentially
           </li>
           <li>Simulates multitasking by time-sharing</li>
@@ -22,7 +22,7 @@ export default function ComparisonTable() {
 
       <div className="panel">
         <div className="multicoreheader">
-          Multi Core Processor
+          Multicore Processor
         </div>
 
         <ul className="list">

@@ -6,6 +6,73 @@ author: "Ang, Byron Scott; Claro, Stephen Jakobb; Placer, Paul John; Sotingco, K
 readingTime: "6-7 minutes"
 ---
 
+import img1 from "../assets/S03_Group6_Processors/1.webp";
+import img2 from "../assets/S03_Group6_Processors/2.webp";
+import img3 from "../assets/S03_Group6_Processors/3.jpg";
+import img4 from "../assets/S03_Group6_Processors/4.jpg";
+import img5 from "../assets/S03_Group6_Processors/5.jpg";
+import img6 from "../assets/S03_Group6_Processors/6.jpg";
+import img7 from "../assets/S03_Group6_Processors/7.jpg";
+import img8 from "../assets/S03_Group6_Processors/8.jpg";
+import img9 from "../assets/S03_Group6_Processors/9.jpg";
+
+export const exhibitPhotos = [
+  {
+    id: '1',
+    src: img1.src,
+    title: '1971 — Intel 4004',
+    caption: 'The world’s first commercially available single-chip microprocessor.'
+  },
+  {
+    id: '2',
+    src: img2.src,
+    title: '2001 — IBM POWER4',
+    caption: 'The world’s first commercial dual-core processor.'
+  },
+  {
+    id: '3',
+    src: img3.src,
+    title: '2005 — Intel Pentium D / AMD Athlon 64 X2',
+    caption: 'Brought dual-core x86 computing into consumer desktop systems.'
+  },
+  {
+    id: '4',
+    src: img4.src,
+    title: '2006 — Intel Core 2 Quad',
+    caption: 'Pioneered mainstream quad-core performance for desktops.'
+  },
+  {
+    id: '5',
+    src: img5.src,
+    title: '2010 — AMD Phenom II X6 / Intel Core i7-980X',
+    caption: 'Introduced 6-core processing to desktop enthusiast platforms.'
+  },
+  {
+    id: '6',
+    src: img6.src,
+    title: '2017 — AMD Ryzen 7 1700X',
+    caption: 'Brought affordable 8-core, 16-thread performance to mainstream PCs.'
+  },
+  {
+    id: '7',
+    src: img7.src,
+    title: '2019 — AMD Ryzen 9 3950X',
+    caption: 'Pushed core counts to 16 cores on a consumer desktop socket.'
+  },
+  {
+    id: '8',
+    src: img8.src,
+    title: '2019 — AMD Ryzen Threadripper 3970X',
+    caption: 'Delivered 32 cores for high-end workstation computing.'
+  },
+  {
+    id: '9',
+    src: img9.src,
+    title: '2021 — Intel Alder Lake (12th Gen)',
+    caption: 'Introduced x86 performance hybrid architecture with P-cores and E-cores.'
+  }
+];
+
 {/* component imports */}
 import InteractiveCpu from '../components/S03_Group6/InteractiveCpu.jsx';
 import Background from '../components/S03_Group6/Background.astro';
@@ -13,6 +80,7 @@ import ComparisonTable from '../components/S03_Group6/ComparisonTable.jsx';
 import TrendGraph from '../components/S03_Group6/TrendGraph.jsx';
 import ChefAnalogy from '../components/S03_Group6/ChefAnalogy.jsx';
 import PowerFormula from '../components/S03_Group6/PowerFormula.jsx';
+import PhotoGallery from '../components/S03_Group6/PhotoGallery.jsx';
 
 <div className="multicore-exhibit">
 <Background />
@@ -31,19 +99,16 @@ Around 2005, realizing that a single core could no longer be pushed to higher fr
 
 Think of a CPU like a restaurant kitchen. A single-core processor is like having one incredibly fast, highly skilled chef. To complete more orders, you have to force that chef to work faster and faster. Eventually, the chef gets exhausted, the kitchen overheats, and they can still only cook one dish at a time.
 
-A multicore processor changes the layout. Instead of forcing one chef to work at an impossible speed, you hire four chefs. They can work at a comfortable, moderate pace, but because they are working in parallel (cooking four dishes simultaneously), the total output of the kitchen increases dramatically without anyone overheating.
+A multicore processor changes the layout. Instead of forcing one chef to work at an impossible speed, you hire four chefs. In a symmetric multiprocessing environment, the operating system treats each physical core as a distinct logical entity, much like a head chef assigning incoming order tickets across separate workstation line cooks. To execute an application, software instructions are divided into independent paths called threads. The OS schedules these distinct threads across available cores simultaneously, allowing them to work in parallel at a comfortable, moderate pace. To prevent order mix-ups or resource conflicts, the cores continuously coordinate using shared memory frameworks and internal communication lines, ensuring data stays synchronized without creating computational bottlenecks.
 
-But how did this solve the Power Wall mathematically? It comes down to the physics of dynamic power consumption in CMOS circuits, expressed by the following formula:
-
+By distributing the workload across multiple parallel workers, the total output of the system increases dramatically without any single core overheating. But how did this approach solve the Power Wall mathematically? It comes down to the physics of dynamic power consumption in CMOS circuits, expressed by the following formula:
 <PowerFormula client:load />
 
 Because power consumption scales quadratically with voltage, running a single core at extreme frequencies requires a high operating voltage that causes power and heat to spike exponentially. By splitting a workload across multiple cores, each individual core can run at a significantly lower frequency and a reduced operating voltage. Because of the quadratic relationship, a slight reduction in voltage yields a massive drop in heat and power usage. This allowed computing throughput to increase through parallel execution without exceeding the thermal limits of the silicon.
 
 ## The Multicore CPU
-The transition to multicore architecture originally took root in heavy-duty enterprise and server spaces, with IBM introducing the first commercial non-embedded dual-core processor, the POWER4, in 2001. However, the architecture truly went mainstream in 2005 when Intel released the Pentium D and AMD launched the Athlon 64 X2. This marked a monumental paradigm shift in software development; programmers could no longer rely on hardware engineers to automatically speed up their applications and instead had to learn how to write multi-threaded code to take advantage of parallel computing. Over the past two decades, this has evolved from simple dual-core setups to complex hybrid architectures (like ARM's big.LITTLE or Intel's Performance/Efficient core splits) found in modern smartphones, laptops, and desktop computers.
-
-A multicore processor functions by dividing software instructions into separate, independent paths of execution called threads. In a symmetric multiprocessing environment, the operating system treats each physical core as a distinct logical entity. When you run an application, the OS schedules different tasks across these cores simultaneously. The cores coordinate with each other using shared memory frameworks and internal communication lines to ensure data stays synchronized without creating computational bottlenecks or data corruption.
-
+The transition to multicore processing began in heavy-duty enterprise environments when IBM introduced the first commercial dual-core processor, the POWER4, in 2001. Mainstream desktop computing quickly followed in 2005 with the launch of the Intel Pentium D and AMD Athlon 64 X2, forcing a monumental paradigm shift in software engineering from single-threaded clock speed reliance to multithreaded parallel programming. Over the next two decades, consumer core counts expanded rapidly, from early quad-core and 6-core enthusiast chips in the late 2000s to AMD’s aggressive push bringing 8-core and 16-core chips to standard desktop sockets, and up to 32 cores for workstations. Today, processor design has evolved into complex hybrid architectures, pioneered in x86 by Intel's Alder Lake in 2021, which pairs dedicated Performance cores with high-efficiency cores to maximize multitasking across modern devices.
+<PhotoGallery photos={exhibitPhotos} client:visible />
 <ComparisonTable client:load/>
 
 ## Interactive Multicore CPU Model

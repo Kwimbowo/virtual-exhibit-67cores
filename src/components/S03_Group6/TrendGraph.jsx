@@ -26,11 +26,11 @@ export default function TrendGraph() {
     };
 
     const seriesMeta = [
-        { id: "transistors", label: "Transistors (thousands)", color: "#f97316" },
-        { id: "specint", label: "Single-Thread Performance", color: "#3b82f6" },
-        { id: "frequency", label: "Frequency (MHz)", color: "#22c55e" },
-        { id: "watts", label: "Typical Power (Watts)", color: "#ef4444" },
-        { id: "cores", label: "Logical Cores", color: "#eab308" }
+        { id: "transistors", label: "Transistors (thousands)", color: "#b782cc" },
+        { id: "specint", label: "Single-Thread Performance", color: "#7a95c2" },
+        { id: "frequency", label: "Frequency (MHz)", color: "#61be84" },
+        { id: "watts", label: "Typical Power (Watts)", color: "#c97373" },
+        { id: "cores", label: "Logical Cores", color: "#ffbf00", highlighted: true }
     ];
 
     const width = 720;
@@ -57,6 +57,7 @@ export default function TrendGraph() {
 
             <div style={styles.chartWrapper}>
                 <svg viewBox={`0 0 ${width} ${height}`} style={styles.svg}>
+                    {/* Horizontal Gridlines & Y-Axis Labels */}
                     {[0, 1, 2, 3, 4, 5, 6, 7].map((exp) => {
                         const y = getY(Math.pow(10, exp));
                         return (
@@ -83,6 +84,7 @@ export default function TrendGraph() {
                         );
                     })}
 
+                    {/* Vertical Gridlines & X-Axis Labels */}
                     {[1970, 1980, 1990, 2000, 2010, 2020].map((year) => {
                         const x = getX(year);
                         return (
@@ -108,16 +110,19 @@ export default function TrendGraph() {
                         );
                     })}
 
+                    {/* Power Wall Vertical Dashed Line */}
                     <line
                         x1={wallX}
                         y1={padding.top}
                         x2={wallX}
                         y2={height - padding.bottom}
                         stroke="#ef4444"
-                        strokeWidth="2"
-                        strokeDasharray="6 4"
+                        strokeWidth="1.5"
+                        strokeDasharray="4 4"
+                        strokeOpacity="0.8"
                     />
 
+                    {/* Subdued Power Wall Callout Box */}
                     <g transform={`translate(${wallX - 8}, ${padding.top + 10})`}>
                         <rect
                             x="-115"
@@ -125,21 +130,38 @@ export default function TrendGraph() {
                             width="110"
                             height="42"
                             fill="#16191b"
-                            stroke="#ef4444"
+                            stroke="rgba(239, 68, 68, 0.4)"
                             strokeWidth="1"
                             rx="4"
                         />
-                        <text x="-60" y="15" fill="#ef4444" fontSize="10" fontWeight="bold" textAnchor="middle" fontFamily="monospace">
+                        <text
+                            x="-60"
+                            y="15"
+                            fill="#f87171"
+                            fontSize="10"
+                            fontWeight="bold"
+                            textAnchor="middle"
+                            fontFamily="monospace"
+                        >
                             POWER WALL
                         </text>
-                        <text x="-60" y="30" fill="var(--textS)" fontSize="8" textAnchor="middle" fontFamily="monospace">
+                        <text
+                            x="-60"
+                            y="30"
+                            fill="var(--textS)"
+                            fontSize="8"
+                            textAnchor="middle"
+                            fontFamily="monospace"
+                        >
                             Dennard Scaling Ends
                         </text>
                     </g>
 
+                    {/* Data Series Polylines and Circles */}
                     {seriesMeta.map((s) => {
                         const pts = data[s.id];
                         const pointsString = pts.map((p) => `${getX(p.year)},${getY(p.val)}`).join(" ");
+                        const isTarget = s.highlighted;
 
                         return (
                             <g key={s.id}>
@@ -147,15 +169,22 @@ export default function TrendGraph() {
                                     points={pointsString}
                                     fill="none"
                                     stroke={s.color}
-                                    strokeWidth="2.5"
+                                    strokeWidth={isTarget ? "3.5" : "2"}
+                                    strokeOpacity={isTarget ? 1 : 0.75}
+                                    style={{
+                                        filter: isTarget
+                                            ? "drop-shadow(0 0 3px rgba(255,191,0,0.4))"
+                                            : "none"
+                                    }}
                                 />
                                 {pts.map((p, idx) => (
                                     <circle
                                         key={idx}
                                         cx={getX(p.year)}
                                         cy={getY(p.val)}
-                                        r="3.5"
+                                        r={isTarget ? "4.5" : "3"}
                                         fill={s.color}
+                                        fillOpacity={isTarget ? 1 : 0.85}
                                     />
                                 ))}
                             </g>
@@ -163,16 +192,19 @@ export default function TrendGraph() {
                     })}
                 </svg>
 
+                {/* High-Contrast Color Badge Legend */}
                 <div style={styles.legend}>
                     {seriesMeta.map((s) => (
-                        <div
-                            key={s.id}
-                            style={{
-                                ...styles.legendItem,
-                                color: s.color
-                            }}
-                        >
-                            {s.label}
+                        <div key={s.id} style={styles.legendItem}>
+                            <span style={{ ...styles.legendDot, backgroundColor: s.color }} />
+                            <span
+                                style={{
+                                    color: s.highlighted ? "#ffbf00" : "#e2e8f0",
+                                    fontWeight: s.highlighted ? "700" : "400"
+                                }}
+                            >
+                                {s.label}
+                            </span>
                         </div>
                     ))}
                 </div>
@@ -211,14 +243,23 @@ const styles = {
     legend: {
         display: "flex",
         justifyContent: "center",
-        gap: "1.5rem",
+        gap: "1.25rem",
         flexWrap: "wrap",
         marginTop: "0.75rem",
-        paddingTop: "0.5rem",
-        borderTop: "1px dashed var(--borderS)"
+        paddingTop: "0.75rem",
+        borderTop: "1px dashed rgba(255, 255, 255, 0.1)"
     },
     legendItem: {
-        fontSize: "0.85rem",
-        fontWeight: "bold"
+        display: "flex",
+        alignItems: "center",
+        gap: "0.4rem",
+        fontSize: "0.8rem",
+        fontFamily: "monospace"
+    },
+    legendDot: {
+        width: "8px",
+        height: "8px",
+        borderRadius: "50%",
+        display: "inline-block"
     }
 };

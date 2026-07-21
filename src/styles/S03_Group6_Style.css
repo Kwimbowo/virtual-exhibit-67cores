@@ -10,10 +10,6 @@
     --radiusS: 4px;
 }
 
-html {
-  scroll-behavior: smooth;
-}
-
 html:has(.multicore-exhibit) {
     background-color: var(--bg1S) !important;
     background-image: 
@@ -163,7 +159,7 @@ html:has(.multicore-exhibit) .exhibitlink:hover{
     height: 45vw;
     background: linear-gradient(240deg, rgba(0, 255, 208, 0.205), rgba(0, 183, 255, 0.205));
     bottom: -300%;
-    right: 0%;
+    right: 0;
     animation: float-1 9s ease-in-out infinite;
 }
 
@@ -248,7 +244,7 @@ html:has(.multicore-exhibit) .toc:hover {
 }
 
 .multicore-exhibit h2:first-of-type {
-  margin-top: 0rem;
+  margin-top: 0;
 }
 
 .multicore-exhibit p,

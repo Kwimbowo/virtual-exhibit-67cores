@@ -9,7 +9,6 @@
     - [Conceptualization](#conceptualization)
     - [Implementation](#implementation)
     - [What We Learned](#what-we-learned)
-    - [What's Next](#whats-next-for-final-submission)
 - [Generative AI Use Disclosure](#generative-ai-use-disclosure)
 - [Tech Stack Plan](#tech-stack-plan)
     - [Problem Solving Story](#problem-solving-story)
@@ -37,14 +36,17 @@
 ### Conceptualization
 There are many problem-solving stories to choose from in the entire history of computer architecture, but the struggle for our group lied in conceptualizing what the interactive component would be. We decided on a story relevant even to the technology we use today, and eventually ended up with a story that could easily be visualized in a webpage: the Power Wall problem of CPU computation speed (and the shift to multicore computing).
 
+To expound on this problem and the story on how it was solved, we decided to explain the trends of microprocessors for the past few decades, showing how the performance, clock speed, and power disspiation for single-core processors increased through the years, and highlighting the point (sometime in 2005) where processors hit a bottleneck for increasing single-core performance because of the increase in power disspiation, which started the trend of multicore processors and increasing the number of logical cores instead of solely focusing on single-core performance. We also decided to expound on the technology of the multicore CPU along with its history, and gave a simplified explanation of how multicore CPUs are faster and more efficient than single-core ones through an analogy (chefs in a restaurant).
+
+To help with visualizing all these information, we decided to add a graph to explain the trends of microprocessors, images to show how the appearance of processors changed throughout the years, and another interactive component for calculating and visualizing CPU power dissipation.
+
 ### Implementation
 Given the exhibit template, the actual implementation of the exhibit webpage was fairly straightforward; the interactive component was programmed with React, and the text contents of the page were simply typed out in Markdown because the template handled the structure of the webpage and allowed for writing it in a ```.mdx``` file. For the mid-milestone, we have managed to finish implementing the interactive component and most, if not all of the contents of the exhibit; the webpage is more or less ready for deployment.
 
+For the final submission, the webpage's visual design and styles were completely overhauled. Additional information and visual aids were implemented for the Problem Solving Story and on the discussion of multicore CPUs. For the latter topic, a new interactive component was also implemented in React. 
+
 ### What we learned
 From the problem-solving story our group chose, we learned about how computers mostly only had single-core CPUs back then and how slow they were at multitasking relative to their performance in individual applications compared to the computers we have today, and from this we gained appreciation for the multicore technology that is in all the devices we use today but taken for granted, as well as for the people who pioneered this technology. We also learned from the story about the power wall problem that limited the max single-core frequency of CPUs, for which multicore technology was a workaround to keep increasing CPU performance without having to focus on single-core frequency.
-
-### What's next (for final submission)
-With the current state of the exhibit webpage already being ready for deployment, the group plans to further improve the design and UI of the interactive component, add more text content and information further expounding on multicore processors, and implement revisions as needed by the course instructor.
 
 ## Generative AI Use Disclosure
 During the preparation of this exhibit webpage, the group used the following generative AI tools and/or services:
